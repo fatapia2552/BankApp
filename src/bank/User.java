@@ -4,28 +4,30 @@
  */
 package bank;
 
-import java.util.ArrayList;
+
 
 /**
  *
  * @author edangulo
  */
 public class User {
-    
+
     private int id;
     private String firstname;
     private String lastname;
     private int age;
-    private ArrayList<Account> accounts;
 
     public User(int id, String firstname, String lastname, int age) {
+        if (age < 18) {
+            throw new IllegalArgumentException("El usuario debe ser mayor de edad.");
+        }
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.age = age;
-        this.accounts = new ArrayList<>();
     }
 
+    // Getters
     public int getId() {
         return id;
     }
@@ -41,13 +43,9 @@ public class User {
     public int getAge() {
         return age;
     }
-    
-    public int getNumAccounts() {
-        return this.accounts.size();
+
+    @Override
+    public String toString() {
+        return firstname + " " + lastname + " (ID: " + id + ")";
     }
-    
-    public void addAccount(Account account) {
-        this.accounts.add(account);
-    }
-    
 }

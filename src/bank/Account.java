@@ -9,49 +9,53 @@ package bank;
  * @author edangulo
  */
 public class Account {
-    
+
     private String id;
-    private User owner;
+    private int ownerId; 
     private double balance;
 
-    public Account(String id, User owner) {
+    public Account(String id, Integer ownerId) {
         this.id = id;
-        this.owner = owner;
+        this.ownerId = ownerId;
         this.balance = 0;
-        
-        this.owner.addAccount(this);
     }
-    
-    public Account(String id, User owner, double balance) {
+
+    public Account(String id, Integer ownerId, double balance) {
+        if (balance < 0) {
+            throw new IllegalArgumentException("El saldo inicial no puede ser negativo ");
+        }
         this.id = id;
-        this.owner = owner;
+        this.ownerId = ownerId;
         this.balance = balance;
-        
-        this.owner.addAccount(this);
     }
-    
+
     public String getId() {
         return id;
     }
 
-    public User getOwner() {
-        return owner;
+    public Integer getOwnerId() {
+        return ownerId;
     }
 
     public double getBalance() {
         return balance;
     }
-    
+
     public void deposit(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("El monto depositado debe ser mayor a cero.");
+        }
         this.balance += amount;
     }
-    
+
     public boolean withdraw(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("El monto retirado debe ser mayor a cero.");
+        }
         if (amount > this.balance) {
             return false;
         }
         this.balance -= amount;
         return true;
     }
-    
 }

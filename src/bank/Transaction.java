@@ -4,38 +4,52 @@
  */
 package bank;
 
+
 /**
  *
  * @author edangulo
  */
+
 public class Transaction {
+
     
     private TransactionType type;
-    private Account sourceAccount;
-    private Account destinationAccount;
+    private String sourceAccountId; 
+    private String destinationAccountId; 
     private double amount;
-    
-    public Transaction(TransactionType type, Account sourceAccount, Account destinationAccount, double amount) {
+
+    public Transaction(TransactionType type, String sourceAccountId, String destinationAccountId, double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("El monto de la transacción debe ser mayor a cero.");
+        }
+        
         this.type = type;
-        this.sourceAccount = sourceAccount;
-        this.destinationAccount = destinationAccount;
+        this.sourceAccountId = sourceAccountId;
+        this.destinationAccountId = destinationAccountId;
         this.amount = amount;
     }
+
+
 
     public TransactionType getType() {
         return type;
     }
 
-    public Account getSourceAccount() {
-        return sourceAccount;
+    public String getSourceAccountId() {
+        return sourceAccountId;
     }
 
-    public Account getDestinationAccount() {
-        return destinationAccount;
+    public String getDestinationAccountId() {
+        return destinationAccountId;
     }
 
     public double getAmount() {
         return amount;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Transaction [type=" + type + ", sourceAccountId=" + sourceAccountId +
+               ", destinationAccountId=" + destinationAccountId + ", amount=" + amount + "]";
+    }
 }
