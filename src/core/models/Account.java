@@ -21,9 +21,6 @@ public class Account {
     }
 
     public Account(String id, Integer ownerId, double balance) {
-        if (balance < 0) {
-            throw new IllegalArgumentException("El saldo inicial no puede ser negativo ");
-        }
         this.id = id;
         this.ownerId = ownerId;
         this.balance = balance;

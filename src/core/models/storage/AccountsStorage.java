@@ -37,4 +37,12 @@ public class AccountsStorage {
         this.accounts.add(account);
         return true;
     }
+    public Account getAccount(String id) {
+        for (Account account : this.accounts) {
+            if (account.getId().equals(id)) {
+                return account;
+            }
+        }
+        return null;
+    }
 }

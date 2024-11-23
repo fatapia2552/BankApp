@@ -18,9 +18,6 @@ public class User {
     private int age;
 
     public User(int id, String firstname, String lastname, int age) {
-        if (age < 18) {
-            throw new IllegalArgumentException("El usuario debe ser mayor de edad.");
-        }
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;

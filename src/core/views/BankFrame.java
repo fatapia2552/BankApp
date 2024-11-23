@@ -559,6 +559,7 @@ public class BankFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_RegisterActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
         String id = txt_UserID.getText();
         String balance = txt_InitialBalance.getText();
         
@@ -574,7 +575,7 @@ public class BankFrame extends javax.swing.JFrame {
         txt_UserID.setText("");
         txt_InitialBalance.setText("");
             
-        
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
