@@ -4,7 +4,7 @@
  */
 package core.models.storage;
 
-import bank.User;
+import core.models.User;
 import java.util.ArrayList;
 
 /**
@@ -16,10 +16,10 @@ public class UsersStorage {
     
     private static UsersStorage instance;
     
-    private ArrayList<User> persons;
+    private ArrayList<User> users;
 
     private UsersStorage() {
-        this.persons = new ArrayList<>();
+        this.users = new ArrayList<>();
     }
     
     
@@ -31,17 +31,17 @@ public class UsersStorage {
     return instance;
 }
     public boolean addUser(User user) {
-        for (User u : this.persons) {
+        for (User u : this.users) {
             if(u.getId() == user.getId()) {
                 return false;
             }
         }
-        this.persons.add(user);
+        this.users.add(user);
         return true;
     }
     
-    public User getPerson(int id) {
-        for (User user : this.persons) {
+    public User getUser(int id) {
+        for (User user : this.users) {
             if (user.getId() == id) {
                 return user;
             }

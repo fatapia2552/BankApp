@@ -4,8 +4,8 @@
  */
 package service;
 
-import bank.Account;
-import bank.Transaction;
+import core.models.Account;
+import core.models.Transaction;
 import bank.TransactionType;
 import java.util.ArrayList;
 

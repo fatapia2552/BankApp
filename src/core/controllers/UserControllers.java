@@ -4,7 +4,7 @@
  */
 package core.controllers;
 
-import bank.User;
+import core.models.User;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.storage.UsersStorage;
@@ -41,9 +41,9 @@ public class UserControllers {
             }
             UsersStorage storage = UsersStorage.getInstance();
             if (!storage.addUser(new User(IdInt, firstname, lastname, AgeInt))) {
-                return new Response("A person with that ID already exists", Status.BAD_REQUEST);
+                return new Response("An user with that ID already exists", Status.BAD_REQUEST);
             }
-            return new Response("Person created succesfully", Status.CREATED);
+            return new Response("User registered succesfully", Status.CREATED);
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR); 
         }

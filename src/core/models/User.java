@@ -4,24 +4,30 @@
  */
 package core.models;
 
+
+
 /**
  *
- * @author Yuceth
+ * @author edangulo
  */
 public class User {
+
     private int id;
     private String firstname;
     private String lastname;
     private int age;
 
     public User(int id, String firstname, String lastname, int age) {
+        if (age < 18) {
+            throw new IllegalArgumentException("El usuario debe ser mayor de edad.");
+        }
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.age = age;
-
     }
 
+    // Getters
     public int getId() {
         return id;
     }
@@ -38,25 +44,8 @@ public class User {
         return age;
     }
 
-    
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    
-
     @Override
     public String toString() {
-        return firstname + " " +lastname;
+        return firstname + " " + lastname + " (ID: " + id + ")";
     }
-    
 }

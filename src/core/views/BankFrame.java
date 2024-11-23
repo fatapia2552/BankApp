@@ -4,10 +4,11 @@
  */
 package core.views;
 
-import bank.Account;
-import bank.Transaction;
+import core.models.Account;
+import core.models.Transaction;
 import bank.TransactionType;
-import bank.User;
+import core.controllers.AccountController;
+import core.models.User;
 import core.controllers.UserControllers;
 import core.controllers.utils.Response;
 import java.util.ArrayList;
@@ -561,33 +562,19 @@ public class BankFrame extends javax.swing.JFrame {
         String id = txt_UserID.getText();
         String balance = txt_InitialBalance.getText();
         
-        try {
-            int userId = Integer.parseInt(txt_UserID.getText());
-            double initialBalance = Double.parseDouble(txt_InitialBalance.getText());
+        Response response = AccountController.CreateAccount(id, balance);
+        
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+        
+        txt_UserID.setText("");
+        txt_InitialBalance.setText("");
             
-            User selectedUser = null;
-            for (User user : this.users) {
-                if (user.getId() == userId && selectedUser == null) {
-                    selectedUser = user;
-                }
-            }
-            
-            if (selectedUser != null) {
-                Random random = new Random();
-                int first = random.nextInt(1000);
-                int second = random.nextInt(1000000);
-                int third = random.nextInt(100);
-                
-                String accountId = String.format("%03d", first) + "-" + String.format("%06d", second) + "-" + String.format("%02d", third);
-                
-                this.accounts.add(new Account(accountId, selectedUser, initialBalance));
-                
-                txt_UserID.setText("");
-                txt_InitialBalance.setText("");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
