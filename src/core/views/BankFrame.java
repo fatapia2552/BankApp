@@ -8,6 +8,8 @@ import bank.Account;
 import bank.Transaction;
 import bank.TransactionType;
 import bank.User;
+import core.controllers.UserControllers;
+import core.controllers.utils.Response;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -50,17 +52,17 @@ public class BankFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txt_ID = new javax.swing.JTextField();
+        txt_Firstname = new javax.swing.JTextField();
+        txt_Lastname = new javax.swing.JTextField();
+        txt_Age = new javax.swing.JTextField();
+        btn_Register = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        txt_UserID = new javax.swing.JTextField();
+        txt_InitialBalance = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -106,11 +108,23 @@ public class BankFrame extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Age");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton1.setText("Register");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        txt_ID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                txt_IDActionPerformed(evt);
+            }
+        });
+
+        txt_Lastname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_LastnameActionPerformed(evt);
+            }
+        });
+
+        btn_Register.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btn_Register.setText("Register");
+        btn_Register.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RegisterActionPerformed(evt);
             }
         });
 
@@ -133,14 +147,14 @@ public class BankFrame extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(txt_ID, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_Lastname, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_Age, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_Firstname, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(259, 259, 259)
-                .addComponent(jButton1)
+                .addComponent(btn_Register)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -150,22 +164,22 @@ public class BankFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_Firstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_Lastname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_Age, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btn_Register)
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
@@ -204,8 +218,8 @@ public class BankFrame extends javax.swing.JFrame {
                             .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField6)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))))
+                            .addComponent(txt_InitialBalance)
+                            .addComponent(txt_UserID, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(265, 265, 265)
@@ -219,11 +233,11 @@ public class BankFrame extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_UserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_InitialBalance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
@@ -521,30 +535,35 @@ public class BankFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        try {
-            int id = Integer.parseInt(jTextField1.getText());
-            String firstname = jTextField2.getText();
-            String lastname = jTextField3.getText();
-            int age = Integer.parseInt(jTextField4.getText());
+    private void btn_RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegisterActionPerformed
+        String id = txt_ID.getText();
+        String firstname = txt_Firstname.getText();
+        String lastname = txt_Lastname.getText();
+        String age = txt_Age.getText();
+        
+        Response response = UserControllers.RegisterUser(id, firstname, lastname, age);
+        
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
             
-            this.users.add(new User(id, firstname, lastname, age));
-            
-            jTextField1.setText("");
-            jTextField2.setText("");
-            jTextField3.setText("");
-            jTextField4.setText("");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+            txt_ID.setText("");
+            txt_Firstname.setText("");
+            txt_Lastname.setText("");
+            txt_Age.setText("");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_RegisterActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        String id = txt_UserID.getText();
+        String balance = txt_InitialBalance.getText();
+        
         try {
-            int userId = Integer.parseInt(jTextField5.getText());
-            double initialBalance = Double.parseDouble(jTextField6.getText());
+            int userId = Integer.parseInt(txt_UserID.getText());
+            double initialBalance = Double.parseDouble(txt_InitialBalance.getText());
             
             User selectedUser = null;
             for (User user : this.users) {
@@ -563,8 +582,8 @@ public class BankFrame extends javax.swing.JFrame {
                 
                 this.accounts.add(new Account(accountId, selectedUser, initialBalance));
                 
-                jTextField5.setText("");
-                jTextField6.setText("");
+                txt_UserID.setText("");
+                txt_InitialBalance.setText("");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
@@ -693,6 +712,14 @@ public class BankFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void txt_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_IDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_IDActionPerformed
+
+    private void txt_LastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_LastnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_LastnameActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -729,7 +756,7 @@ public class BankFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_Register;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -765,14 +792,14 @@ public class BankFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txt_Age;
+    private javax.swing.JTextField txt_Firstname;
+    private javax.swing.JTextField txt_ID;
+    private javax.swing.JTextField txt_InitialBalance;
+    private javax.swing.JTextField txt_Lastname;
+    private javax.swing.JTextField txt_UserID;
     // End of variables declaration//GEN-END:variables
 }
