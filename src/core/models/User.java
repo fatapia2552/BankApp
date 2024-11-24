@@ -4,6 +4,8 @@
  */
 package core.models;
 
+import java.util.ArrayList;
+
 
 
 /**
@@ -16,12 +18,14 @@ public class User {
     private String firstname;
     private String lastname;
     private int age;
+    private ArrayList<Account> accounts;
 
     public User(int id, String firstname, String lastname, int age) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.age = age;
+        this.accounts = new ArrayList<>();
     }
 
     // Getters
@@ -39,6 +43,12 @@ public class User {
 
     public int getAge() {
         return age;
+    }
+    public int getNumAccounts() {
+        return this.accounts.size();
+    }
+    public void addAccount(Account account) {
+        this.accounts.add(account);
     }
 
     @Override

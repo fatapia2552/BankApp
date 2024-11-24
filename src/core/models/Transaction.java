@@ -4,7 +4,7 @@
  */
 package core.models;
 
-import bank.TransactionType;
+import core.controllers.utils.TransactionType;
 
 
 /**
@@ -16,42 +16,31 @@ public class Transaction {
 
     
     private TransactionType type;
-    private String sourceAccountId; 
-    private String destinationAccountId; 
+    private Account sourceAccount;
+    private Account destinationAccount;
     private double amount;
 
-    public Transaction(TransactionType type, String sourceAccountId, String destinationAccountId, double amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("El monto de la transacción debe ser mayor a cero.");
-        }
-        
+    public Transaction(TransactionType type, Account sourceAccount, Account destinationAccount, double amount) {
         this.type = type;
-        this.sourceAccountId = sourceAccountId;
-        this.destinationAccountId = destinationAccountId;
+        this.sourceAccount = sourceAccount;
+        this.destinationAccount = destinationAccount;
         this.amount = amount;
     }
-
-
 
     public TransactionType getType() {
         return type;
     }
 
-    public String getSourceAccountId() {
-        return sourceAccountId;
+    public Account getSourceAccount() {
+        return sourceAccount;
     }
 
-    public String getDestinationAccountId() {
-        return destinationAccountId;
+    public Account getDestinationAccount() {
+        return destinationAccount;
     }
 
     public double getAmount() {
         return amount;
     }
-
-    @Override
-    public String toString() {
-        return "Transaction [type=" + type + ", sourceAccountId=" + sourceAccountId +
-               ", destinationAccountId=" + destinationAccountId + ", amount=" + amount + "]";
+    
     }
-}

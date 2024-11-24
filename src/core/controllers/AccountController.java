@@ -44,14 +44,14 @@ public class AccountController {
                 
                 AccountsStorage storage = AccountsStorage.getInstance();
                 boolean verifyId = false;
-                
+                String accountId = "";
                 while(verifyId == false){
                 Random random = new Random();
                 int first = random.nextInt(1000);
                 int second = random.nextInt(1000000);
                 int third = random.nextInt(100);
                 
-                String accountId = String.format("%03d", first) + "-" + 
+                accountId = String.format("%03d", first) + "-" + 
                                    String.format("%06d", second) + "-" + 
                                    String.format("%02d", third);
                 
@@ -69,7 +69,7 @@ public class AccountController {
                 return new Response("Balance must be numeric", Status.BAD_REQUEST);
             }
                 
-                if (!storage.addAccount(new Account(id, selectedUser.getId(), initialBalance))) {
+                if (!storage.addAccount(new Account(accountId, selectedUser, initialBalance))) {
                 return new Response("An Account with that User already exists", Status.BAD_REQUEST);
             }
                 return new Response("Account succesfully created", Status.CREATED);

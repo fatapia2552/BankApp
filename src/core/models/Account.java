@@ -11,27 +11,31 @@ package core.models;
 public class Account {
 
     private String id;
-    private int ownerId; 
+    private User owner; 
     private double balance;
 
-    public Account(String id, Integer ownerId) {
+    public Account(String id, User owner) {
         this.id = id;
-        this.ownerId = ownerId;
+        this.owner = owner;
         this.balance = 0;
+        
+        this.owner.addAccount(this);
     }
 
-    public Account(String id, Integer ownerId, double balance) {
+    public Account(String id, User owner, double balance) {
         this.id = id;
-        this.ownerId = ownerId;
+        this.owner = owner;
         this.balance = balance;
+        
+        this.owner.addAccount(this);
     }
 
     public String getId() {
         return id;
     }
 
-    public Integer getOwnerId() {
-        return ownerId;
+    public User getOwner() {
+        return owner;
     }
 
     public double getBalance() {
@@ -39,16 +43,10 @@ public class Account {
     }
 
     public void deposit(double amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("El monto depositado debe ser mayor a cero.");
-        }
         this.balance += amount;
     }
 
     public boolean withdraw(double amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("El monto retirado debe ser mayor a cero.");
-        }
         if (amount > this.balance) {
             return false;
         }

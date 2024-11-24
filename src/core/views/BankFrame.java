@@ -6,8 +6,9 @@ package core.views;
 
 import core.models.Account;
 import core.models.Transaction;
-import bank.TransactionType;
+import core.controllers.utils.TransactionType;
 import core.controllers.AccountController;
+import core.controllers.TransactionController;
 import core.models.User;
 import core.controllers.UserControllers;
 import core.controllers.utils.Response;
@@ -71,10 +72,10 @@ public class BankFrame extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txt_SourceAcc = new javax.swing.JTextField();
+        txt_DestinationAcc = new javax.swing.JTextField();
+        txt_Amount = new javax.swing.JTextField();
+        bx_TransactionType = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -262,9 +263,14 @@ public class BankFrame extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setText("Amount");
 
-        jTextField8.setToolTipText("");
+        txt_DestinationAcc.setToolTipText("");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Deposit", "Withdraw", "Transfer" }));
+        bx_TransactionType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Deposit", "Withdraw", "Transfer" }));
+        bx_TransactionType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bx_TransactionTypeActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jButton3.setText("Execute");
@@ -289,10 +295,10 @@ public class BankFrame extends javax.swing.JFrame {
                             .addComponent(jLabel11))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jComboBox1, 0, 485, Short.MAX_VALUE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(txt_DestinationAcc, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_SourceAcc, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(bx_TransactionType, 0, 485, Short.MAX_VALUE)
+                            .addComponent(txt_Amount, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(227, 227, 227)
                         .addComponent(jLabel9)))
@@ -309,19 +315,19 @@ public class BankFrame extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bx_TransactionType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_SourceAcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_DestinationAcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_Amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
@@ -579,13 +585,34 @@ public class BankFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        try {
-            String type = jComboBox1.getItemAt(jComboBox1.getSelectedIndex());
+
+        String SourceAcc = txt_SourceAcc.getText();
+        String DestinationAcc = txt_DestinationAcc.getText();
+        String Amount = txt_Amount.getText();
+        String type = bx_TransactionType.getItemAt(bx_TransactionType.getSelectedIndex());
+        
+        switch(type) {
+            case "Deposit":{
+                Response response = TransactionController.Deposit();
+                break;
+            }
+            case "Withdraw": {
+                Response response = TransactionController.Withdraw(SourceAcc, Amount);
+                break;
+            }
+            case "Transfer": {
+                Response response = TransactionController.Transfer(SourceAcc, DestinationAcc, Amount);
+                break;
+            }
+            
+            txt_SourceAcc.setText("");
+            txt_DestinationAcc.setText("");
+            txt_Amount.setText("");
+            
             switch (type) {
                 case "Deposit": {
-                    String destinationAccountId = jTextField8.getText();
-                    double amount = Double.parseDouble(jTextField9.getText());
+                    String destinationAccountId = txt_DestinationAcc.getText();
+                    double amount = Double.parseDouble(txt_Amount.getText());
                     
                     Account destinationAccount = null;
                     for (Account account : this.accounts) {
@@ -598,15 +625,15 @@ public class BankFrame extends javax.swing.JFrame {
                         
                         this.transactions.add(new Transaction(TransactionType.DEPOSIT, null, destinationAccount, amount));
                         
-                        jTextField7.setText("");
-                        jTextField8.setText("");
-                        jTextField9.setText("");
+                        txt_SourceAcc.setText("");
+                        txt_DestinationAcc.setText("");
+                        txt_Amount.setText("");
                     }
                     break;
                 }
                 case "Withdraw": {
-                    String sourceAccountId = jTextField7.getText();
-                    double amount = Double.parseDouble(jTextField9.getText());
+                    String sourceAccountId = txt_SourceAcc.getText();
+                    double amount = Double.parseDouble(txt_Amount.getText());
                     
                     Account sourceAccount = null;
                     for (Account account : this.accounts) {
@@ -617,16 +644,16 @@ public class BankFrame extends javax.swing.JFrame {
                     if (sourceAccount != null && sourceAccount.withdraw(amount)) {
                         this.transactions.add(new Transaction(TransactionType.WITHDRAW, sourceAccount, null, amount));
                         
-                        jTextField7.setText("");
-                        jTextField8.setText("");
-                        jTextField9.setText("");
+                        txt_SourceAcc.setText("");
+                        txt_DestinationAcc.setText("");
+                        txt_Amount.setText("");
                     }
                     break;
                 }
                 case "Transfer": {
-                    String sourceAccountId = jTextField7.getText();
-                    String destinationAccountId = jTextField8.getText();
-                    double amount = Double.parseDouble(jTextField9.getText());
+                    String sourceAccountId = txt_SourceAcc.getText();
+                    String destinationAccountId = txt_DestinationAcc.getText();
+                    double amount = Double.parseDouble(txt_Amount.getText());
                     
                     Account sourceAccount = null;
                     Account destinationAccount = null;
@@ -645,16 +672,16 @@ public class BankFrame extends javax.swing.JFrame {
                         
                         this.transactions.add(new Transaction(TransactionType.TRANSFER, sourceAccount, destinationAccount, amount));
                         
-                        jTextField7.setText("");
-                        jTextField8.setText("");
-                        jTextField9.setText("");
+                        txt_SourceAcc.setText("");
+                        txt_DestinationAcc.setText("");
+                        txt_Amount.setText("");
                     }
                     break;
                 }
                 default: {
-                    jTextField7.setText("");
-                    jTextField8.setText("");
-                    jTextField9.setText("");
+                    txt_SourceAcc.setText("");
+                    txt_DestinationAcc.setText("");
+                    txt_Amount.setText("");
                     break;
                 }
             }
@@ -708,6 +735,10 @@ public class BankFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_LastnameActionPerformed
 
+    private void bx_TransactionTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bx_TransactionTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bx_TransactionTypeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -745,12 +776,12 @@ public class BankFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Register;
+    private javax.swing.JComboBox<String> bx_TransactionType;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -780,14 +811,14 @@ public class BankFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JTextField txt_Age;
+    private javax.swing.JTextField txt_Amount;
+    private javax.swing.JTextField txt_DestinationAcc;
     private javax.swing.JTextField txt_Firstname;
     private javax.swing.JTextField txt_ID;
     private javax.swing.JTextField txt_InitialBalance;
     private javax.swing.JTextField txt_Lastname;
+    private javax.swing.JTextField txt_SourceAcc;
     private javax.swing.JTextField txt_UserID;
     // End of variables declaration//GEN-END:variables
 }
