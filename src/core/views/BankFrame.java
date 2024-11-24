@@ -68,7 +68,7 @@ public class BankFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txt_UserID = new javax.swing.JTextField();
         txt_InitialBalance = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btn_Create = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -79,22 +79,22 @@ public class BankFrame extends javax.swing.JFrame {
         txt_DestinationAcc = new javax.swing.JTextField();
         txt_Amount = new javax.swing.JTextField();
         bx_TransactionType = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
+        btn_Exe = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
+        btn_RefUsers = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
+        btn_RefAcc = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
+        btn_RefTrans = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -199,11 +199,11 @@ public class BankFrame extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Initial Balance");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton2.setText("Create");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_Create.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btn_Create.setText("Create");
+        btn_Create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_CreateActionPerformed(evt);
             }
         });
 
@@ -228,7 +228,7 @@ public class BankFrame extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(265, 265, 265)
-                .addComponent(jButton2)
+                .addComponent(btn_Create)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -245,7 +245,7 @@ public class BankFrame extends javax.swing.JFrame {
                     .addComponent(txt_InitialBalance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btn_Create)
                 .addContainerGap(163, Short.MAX_VALUE))
         );
 
@@ -275,11 +275,11 @@ public class BankFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton3.setText("Execute");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn_Exe.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btn_Exe.setText("Execute");
+        btn_Exe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn_ExeActionPerformed(evt);
             }
         });
 
@@ -308,7 +308,7 @@ public class BankFrame extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(255, 255, 255)
-                .addComponent(jButton3)
+                .addComponent(btn_Exe)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -333,7 +333,7 @@ public class BankFrame extends javax.swing.JFrame {
                     .addComponent(txt_Amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btn_Exe)
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
@@ -363,11 +363,11 @@ public class BankFrame extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton4.setText("Refresh");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn_RefUsers.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btn_RefUsers.setText("Refresh");
+        btn_RefUsers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btn_RefUsersActionPerformed(evt);
             }
         });
 
@@ -385,7 +385,7 @@ public class BankFrame extends javax.swing.JFrame {
                         .addGap(62, 62, 62)
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addComponent(btn_RefUsers)
                         .addGap(88, 88, 88))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -394,7 +394,7 @@ public class BankFrame extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jButton4))
+                    .addComponent(btn_RefUsers))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                 .addContainerGap())
@@ -426,11 +426,11 @@ public class BankFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable2);
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton5.setText("Refresh");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btn_RefAcc.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btn_RefAcc.setText("Refresh");
+        btn_RefAcc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btn_RefAccActionPerformed(evt);
             }
         });
 
@@ -446,7 +446,7 @@ public class BankFrame extends javax.swing.JFrame {
                 .addGap(66, 66, 66)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(btn_RefAcc)
                 .addGap(90, 90, 90))
         );
         jPanel5Layout.setVerticalGroup(
@@ -455,7 +455,7 @@ public class BankFrame extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jButton5))
+                    .addComponent(btn_RefAcc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                 .addContainerGap())
@@ -494,11 +494,11 @@ public class BankFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable3);
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton6.setText("Refresh");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btn_RefTrans.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btn_RefTrans.setText("Refresh");
+        btn_RefTrans.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btn_RefTransActionPerformed(evt);
             }
         });
 
@@ -514,7 +514,7 @@ public class BankFrame extends javax.swing.JFrame {
                 .addGap(64, 64, 64)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6)
+                .addComponent(btn_RefTrans)
                 .addGap(89, 89, 89))
         );
         jPanel6Layout.setVerticalGroup(
@@ -523,7 +523,7 @@ public class BankFrame extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jButton6))
+                    .addComponent(btn_RefTrans))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                 .addContainerGap())
@@ -567,7 +567,7 @@ public class BankFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_RegisterActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreateActionPerformed
         
         String id = txt_UserID.getText();
         String balance = txt_InitialBalance.getText();
@@ -585,20 +585,18 @@ public class BankFrame extends javax.swing.JFrame {
         txt_InitialBalance.setText("");
             
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_CreateActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btn_ExeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ExeActionPerformed
 
         String SourceAcc = txt_SourceAcc.getText();
         String DestinationAcc = txt_DestinationAcc.getText();
         String Amount = txt_Amount.getText();
         String type = bx_TransactionType.getItemAt(bx_TransactionType.getSelectedIndex());
         
-        switch(type) {
-            case "Deposit":{
-                Response response = TransactionController.Deposit(DestinationAcc, Amount);
-                
-                if (response.getStatus() >= 500) {
+        Response response = TransactionController.Execute(type, SourceAcc, DestinationAcc, Amount);
+        
+        if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
@@ -607,53 +605,13 @@ public class BankFrame extends javax.swing.JFrame {
             txt_SourceAcc.setText("");
             txt_DestinationAcc.setText("");
             txt_Amount.setText("");
-            
-        }  
-            break;  
-            }
-            case "Withdraw": {
-                Response response = TransactionController.Withdraw(SourceAcc, Amount);
-                
-                if (response.getStatus() >= 500) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() >= 400) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-        
-            txt_SourceAcc.setText("");
-            txt_DestinationAcc.setText("");
-            txt_Amount.setText("");
-            
-        }
-                
-                break;
-            }
-            case "Transfer": {
-                Response response = TransactionController.Transfer(SourceAcc, DestinationAcc, Amount);
-                
-                if (response.getStatus() >= 500) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() >= 400) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-        
-            txt_SourceAcc.setText("");
-            txt_DestinationAcc.setText("");
-            txt_Amount.setText("");
-            
-        }
-                
-                break;
-            }
         }
         
             
             
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btn_ExeActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btn_RefUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RefUsersActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -667,9 +625,9 @@ public class BankFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btn_RefUsersActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btn_RefAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RefAccActionPerformed
         
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
@@ -683,9 +641,9 @@ public class BankFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btn_RefAccActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btn_RefTransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RefTransActionPerformed
         
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         model.setRowCount(0);
@@ -699,7 +657,7 @@ public class BankFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btn_RefTransActionPerformed
 
     private void txt_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_IDActionPerformed
         // TODO add your handling code here:
@@ -719,13 +677,13 @@ public class BankFrame extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Create;
+    private javax.swing.JButton btn_Exe;
+    private javax.swing.JButton btn_RefAcc;
+    private javax.swing.JButton btn_RefTrans;
+    private javax.swing.JButton btn_RefUsers;
     private javax.swing.JButton btn_Register;
     private javax.swing.JComboBox<String> bx_TransactionType;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

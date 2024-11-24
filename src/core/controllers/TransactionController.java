@@ -17,57 +17,12 @@ import core.models.storage.TransactionsStorage;
  * @author Yuceth
  */
 public class TransactionController {
-    
-    public static Response Deposit(String destacc, String amount) {
-        try {
-            double amountInt;
-            AccountsStorage accstorage = AccountsStorage.getInstance();
-            Account destinationAccount = accstorage.getAccount(destacc);
-            if(destacc.equals("")){
-                return new Response("Destination Account must not be empty", Status.BAD_REQUEST);
-            }
-            
-            try {
-                amountInt = Double.parseDouble(amount);
-                
-                if(amountInt < 0) {
-                    return new Response("Amount must be positive", Status.BAD_REQUEST);
-                }
-               
-                
-            }catch(NumberFormatException ex) {
-                return new Response("Amount must be numeric", Status.BAD_REQUEST);
-            }
-            if (destinationAccount != null) {
-                        destinationAccount.deposit(amountInt);
-            }
-            TransactionsStorage transtorage = TransactionsStorage.getInstance();
-            if(!transtorage.addTransaction(new Transaction(TransactionType.DEPOSIT, null, destinationAccount, amountInt))){
-                return new Response("", Status.NOT_IMPLEMENTED);
-            } 
-            return new Response("Transaction completed succesfully", Status.CREATED);
-            }catch (Exception ex) {
-            return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR); 
-        }
-    }
-    
-    
-    
-    public static Response Withdraw(String sourceacc, String amount) {
+
+    public static Response Execute(String operationType, String sourceacc, String destacc, String amount) {
         try {
             double amountInt;
 
-          
-            AccountsStorage accstorage = AccountsStorage.getInstance();
-            Account sourceAccount = accstorage.getAccount(sourceacc);
-            if (sourceacc.equals("")) {
-                return new Response("Source Account must not be empty", Status.BAD_REQUEST);
-            }
-            if (sourceAccount == null) {
-                return new Response("Source Account does not exist", Status.NOT_FOUND);
-            }
-
-            
+            // Validación general del monto
             try {
                 amountInt = Double.parseDouble(amount);
                 if (amountInt <= 0) {
@@ -77,77 +32,75 @@ public class TransactionController {
                 return new Response("Amount must be numeric", Status.BAD_REQUEST);
             }
 
-            
-            if (sourceAccount.getBalance() < amountInt) {
-                return new Response("Insufficient funds", Status.BAD_REQUEST);
-            }
-
-           
-            sourceAccount.withdraw(amountInt);
-
-           
-            TransactionsStorage transtorage = TransactionsStorage.getInstance();
-            if (!transtorage.addTransaction(new Transaction(TransactionType.WITHDRAW, sourceAccount, null, amountInt))) {
-                return new Response("Transaction could not be recorded", Status.NOT_IMPLEMENTED);
-            }
-
-            return new Response("Transaction completed successfully", Status.CREATED);
-
-        } catch (Exception ex) {
-            return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
-        }
-    }
-    
-    
-    
-    public static Response Transfer(String sourceacc, String destacc, String amount) {
-        try {
-            double amountInt;
-
-            
+            // Inicialización de almacenamiento
             AccountsStorage accstorage = AccountsStorage.getInstance();
-            Account sourceAccount = accstorage.getAccount(sourceacc);
-            Account destinationAccount = accstorage.getAccount(destacc);
-
-            if (sourceacc.equals("") || destacc.equals("")) {
-                return new Response("Source and Destination Accounts must not be empty", Status.BAD_REQUEST);
-            }
-            if (sourceAccount == null) {
-                return new Response("Source Account does not exist", Status.NOT_FOUND);
-            }
-            if (destinationAccount == null) {
-                return new Response("Destination Account does not exist", Status.NOT_FOUND);
-            }
-
-            
-            try {
-                amountInt = Double.parseDouble(amount);
-                if (amountInt <= 0) {
-                    return new Response("Amount must be positive", Status.BAD_REQUEST);
-                }
-            } catch (NumberFormatException ex) {
-                return new Response("Amount must be numeric", Status.BAD_REQUEST);
-            }
-
-            
-            if (sourceAccount.getBalance() < amountInt) {
-                return new Response("Insufficient funds in Source Account", Status.BAD_REQUEST);
-            }
-
-           
-            sourceAccount.withdraw(amountInt);
-            destinationAccount.deposit(amountInt);
-
-            
             TransactionsStorage transtorage = TransactionsStorage.getInstance();
-            if (!transtorage.addTransaction(new Transaction(TransactionType.TRANSFER, sourceAccount, destinationAccount, amountInt))) {
-                return new Response("Transaction could not be recorded", Status.NOT_IMPLEMENTED);
-            }
 
-            return new Response("Transaction completed successfully", Status.CREATED);
+            // Lógica según la operación
+            switch (operationType.toUpperCase()) {
+                case "DEPOSIT":
+                    if (destacc == null || destacc.isEmpty()) {
+                        return new Response("Destination Account must not be empty", Status.BAD_REQUEST);
+                    }
+                    Account destinationAccount = accstorage.getAccount(destacc);
+                    if (destinationAccount == null) {
+                        return new Response("Destination Account does not exist", Status.NOT_FOUND);
+                    }
+
+                    destinationAccount.deposit(amountInt);
+                    if (!transtorage.addTransaction(new Transaction(TransactionType.DEPOSIT, null, destinationAccount, amountInt))) {
+                        return new Response("Transaction could not be recorded", Status.NOT_IMPLEMENTED);
+                    }
+                    return new Response("Transaction completed successfully", Status.CREATED);
+
+                case "WITHDRAW":
+                    if (sourceacc == null || sourceacc.isEmpty()) {
+                        return new Response("Source Account must not be empty", Status.BAD_REQUEST);
+                    }
+                    Account sourceAccount = accstorage.getAccount(sourceacc);
+                    if (sourceAccount == null) {
+                        return new Response("Source Account does not exist", Status.NOT_FOUND);
+                    }
+                    if (sourceAccount.getBalance() < amountInt) {
+                        return new Response("Insufficient funds", Status.BAD_REQUEST);
+                    }
+
+                    sourceAccount.withdraw(amountInt);
+                    if (!transtorage.addTransaction(new Transaction(TransactionType.WITHDRAW, sourceAccount, null, amountInt))) {
+                        return new Response("Transaction could not be recorded", Status.NOT_IMPLEMENTED);
+                    }
+                    return new Response("Transaction completed successfully", Status.CREATED);
+
+                case "TRANSFER":
+                    if (sourceacc == null || sourceacc.isEmpty() || destacc == null || destacc.isEmpty()) {
+                        return new Response("Source and Destination Accounts must not be empty", Status.BAD_REQUEST);
+                    }
+                    Account srcAccount = accstorage.getAccount(sourceacc);
+                    Account destAccount = accstorage.getAccount(destacc);
+                    if (srcAccount == null) {
+                        return new Response("Source Account does not exist", Status.NOT_FOUND);
+                    }
+                    if (destAccount == null) {
+                        return new Response("Destination Account does not exist", Status.NOT_FOUND);
+                    }
+                    if (srcAccount.getBalance() < amountInt) {
+                        return new Response("Insufficient funds in Source Account", Status.BAD_REQUEST);
+                    }
+
+                    srcAccount.withdraw(amountInt);
+                    destAccount.deposit(amountInt);
+                    if (!transtorage.addTransaction(new Transaction(TransactionType.TRANSFER, srcAccount, destAccount, amountInt))) {
+                        return new Response("Transaction could not be recorded", Status.NOT_IMPLEMENTED);
+                    }
+                    return new Response("Transaction completed successfully", Status.CREATED);
+
+                default:
+                    return new Response("Invalid operation type", Status.BAD_REQUEST);
+            }
 
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         }
     }
-}
+   
+    }
