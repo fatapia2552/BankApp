@@ -1,3 +1,3 @@
 # Bank
-# Integrantes: Yuceth Gil - Fabian Tapia
-# NRC: 2138
+Integrantes: Yuceth Gil - Fabian Tapia
+NRC: 2138
