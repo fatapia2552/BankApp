@@ -45,4 +45,7 @@ public class AccountsStorage {
         }
         return null;
     }
+    public ArrayList<Account> getAccounts() {
+        return accounts;
+    }
 }

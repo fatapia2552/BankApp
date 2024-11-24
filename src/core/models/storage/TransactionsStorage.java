@@ -34,4 +34,7 @@ public class TransactionsStorage {
         this.transactions.add(transaction);
         return true;
     }
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
 }

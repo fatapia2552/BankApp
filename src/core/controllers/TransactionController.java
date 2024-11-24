@@ -28,7 +28,7 @@ public class TransactionController {
             }
             
             try {
-                amountInt = Integer.parseInt(amount);
+                amountInt = Double.parseDouble(amount);
                 
                 if(amountInt < 0) {
                     return new Response("Amount must be positive", Status.BAD_REQUEST);
