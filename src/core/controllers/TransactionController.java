@@ -77,7 +77,7 @@ public class TransactionController {
                 return new Response("Amount must be numeric", Status.BAD_REQUEST);
             }
 
-            // Verificar saldo suficiente
+            
             if (sourceAccount.getBalance() < amountInt) {
                 return new Response("Insufficient funds", Status.BAD_REQUEST);
             }

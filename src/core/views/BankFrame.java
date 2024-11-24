@@ -10,6 +10,7 @@ import core.controllers.utils.TransactionType;
 import core.controllers.AccountController;
 import core.controllers.AccountListController;
 import core.controllers.TransactionController;
+import core.controllers.TransactionListController;
 import core.models.User;
 import core.controllers.UserControllers;
 import core.controllers.UserListController;
@@ -685,15 +686,18 @@ public class BankFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         model.setRowCount(0);
         
-        ArrayList<Transaction> transactionsCopy = (ArrayList<Transaction>) this.transactions.clone();
-        Collections.reverse(transactionsCopy);
+        Response response = TransactionListController.Listar(model);
         
-        for (Transaction transaction : transactionsCopy) {
-            model.addRow(new Object[]{transaction.getType().name(), (transaction.getSourceAccount() != null ? transaction.getSourceAccount().getId() : "None"), (transaction.getDestinationAccount()!= null ? transaction.getDestinationAccount().getId() : "None"), transaction.getAmount()});
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
