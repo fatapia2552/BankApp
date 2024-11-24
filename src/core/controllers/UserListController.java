@@ -7,7 +7,6 @@ package core.controllers;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.User;
-import core.models.storage.AccountsStorage;
 import core.models.storage.UsersStorage;
 import javax.swing.table.DefaultTableModel;
 

@@ -47,9 +47,6 @@ public class Account {
     }
 
     public boolean withdraw(double amount) {
-        if (amount > this.balance) {
-            return false;
-        }
         this.balance -= amount;
         return true;
     }

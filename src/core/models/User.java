@@ -51,8 +51,4 @@ public class User {
         this.accounts.add(account);
     }
 
-    @Override
-    public String toString() {
-        return firstname + " " + lastname + " (ID: " + id + ")";
-    }
 }
