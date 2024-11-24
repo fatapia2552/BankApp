@@ -1,3 +1,3 @@
 # Bank
-Integrantes: Yuceth Gil - Fabian Tapia
+Integrantes: Yuceth Gil Ariza - Fabian Tapia Perez
 NRC: 2138
